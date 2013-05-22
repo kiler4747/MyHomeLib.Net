@@ -1,0 +1,25 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:MyHomeLib.Net" mc:Ignorable="d" x:Class="MyHomeLib.Net.MainWindow"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+	<Window.Resources>
+		<CollectionViewSource x:Key="bdContextViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
+		<CollectionViewSource x:Key="bdContextAutorsViewSource" Source="{Binding Autors, Source={StaticResource bdContextViewSource}}"/>
+	</Window.Resources>
+	<Grid DataContext="{StaticResource bdContextAutorsViewSource}">
+
+		<DataGrid x:Name="autorsDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,36,107,83" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+			<DataGrid.Columns>
+				<DataGridTextColumn x:Name="emailColumn" Width="SizeToHeader" Header="Email" Binding="{Binding Email}"/>
+				<DataGridTextColumn x:Name="firstNameColumn" Width="SizeToHeader" Header="First Name" Binding="{Binding FirstName}"/>
+				<DataGridTextColumn x:Name="homepageColumn" Width="SizeToHeader" Header="Homepage" Binding="{Binding Homepage}"/>
+				<DataGridTextColumn x:Name="idAutorColumn" Width="SizeToHeader" Header="Id Autor" Binding="{Binding IdAutor}"/>
+				<DataGridTextColumn x:Name="lastNameColumn" Width="SizeToHeader" Header="Last Name" Binding="{Binding LastName}"/>
+				<DataGridTextColumn x:Name="middleNameColumn" Width="SizeToHeader" Header="Middle Name" Binding="{Binding MiddleName}"/>
+				<DataGridTextColumn x:Name="nickNameColumn" Width="SizeToHeader" Header="Nick Name" Binding="{Binding NickName}"/>
+			</DataGrid.Columns>
+		</DataGrid>
+
+	</Grid>
+</Window>
