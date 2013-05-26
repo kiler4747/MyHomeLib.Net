@@ -1,25 +1,46 @@
 ﻿<Window
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:MyHomeLib.Net" mc:Ignorable="d" x:Class="MyHomeLib.Net.MainWindow"
-        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:MyHomeLib.Net" mc:Ignorable="d" x:Class="MyHomeLib.Net.MainWindow"
+		Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
 	<Window.Resources>
 		<CollectionViewSource x:Key="bdContextViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
-		<CollectionViewSource x:Key="bdContextAutorsViewSource" Source="{Binding Autors, Source={StaticResource bdContextViewSource}}"/>
+		<CollectionViewSource x:Key="bdContextAutorsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
+		<CollectionViewSource x:Key="bdContextAutorsBooksViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
 	</Window.Resources>
 	<Grid DataContext="{StaticResource bdContextAutorsViewSource}">
-
-		<DataGrid x:Name="autorsDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" Margin="10,36,107,83" ItemsSource="{Binding}" EnableRowVirtualization="True" AutoGenerateColumns="False">
+		<DataGrid x:Name="autorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,30,289,26" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="autorsDataGrid_SelectionChanged">
 			<DataGrid.Columns>
-				<DataGridTextColumn x:Name="emailColumn" Width="SizeToHeader" Header="Email" Binding="{Binding Email}"/>
-				<DataGridTextColumn x:Name="firstNameColumn" Width="SizeToHeader" Header="First Name" Binding="{Binding FirstName}"/>
-				<DataGridTextColumn x:Name="homepageColumn" Width="SizeToHeader" Header="Homepage" Binding="{Binding Homepage}"/>
-				<DataGridTextColumn x:Name="idAutorColumn" Width="SizeToHeader" Header="Id Autor" Binding="{Binding IdAutor}"/>
-				<DataGridTextColumn x:Name="lastNameColumn" Width="SizeToHeader" Header="Last Name" Binding="{Binding LastName}"/>
-				<DataGridTextColumn x:Name="middleNameColumn" Width="SizeToHeader" Header="Middle Name" Binding="{Binding MiddleName}"/>
-				<DataGridTextColumn x:Name="nickNameColumn" Width="SizeToHeader" Header="Nick Name" Binding="{Binding NickName}"/>
+				<DataGridTextColumn x:Name="idAutorColumn" Binding="{Binding IdAutor}" Header="IdAutor" Width="SizeToHeader" Visibility="Collapsed"/>
+				<DataGridTextColumn x:Name="firstNameColumn" Binding="{Binding FirstName}" Header="First Name" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="lastNameColumn" Binding="{Binding LastName}" Header="Last Name" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="middleNameColumn" Binding="{Binding MiddleName}" Header="Middle Name" Width="SizeToHeader"/>
 			</DataGrid.Columns>
 		</DataGrid>
-
+		<TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" TextChanged="TextBox_TextChanged"/>
+		<DataGrid x:Name="booksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bdContextAutorsBooksViewSource}}" Margin="228,0,0,0" RowDetailsVisibilityMode="VisibleWhenSelected">
+			<DataGrid.Columns>
+				<DataGridCheckBoxColumn x:Name="deletedColumn" Binding="{Binding Deleted}" Header="Deleted" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="langColumn" Binding="{Binding Lang}" Header="Lang" Width="SizeToHeader"/>
+				<DataGridTemplateColumn x:Name="modifiedColumn" Header="Modified" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding Modified, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTemplateColumn x:Name="timeColumn" Header="Time" Width="SizeToHeader">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate>
+							<DatePicker SelectedDate="{Binding Time, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn x:Name="titleColumn" Binding="{Binding Title}" Header="Title" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="title1Column" Binding="{Binding Title1}" Header="Title 1" Width="SizeToHeader"/>
+				<DataGridTextColumn x:Name="yearColumn" Binding="{Binding Year}" Header="Year" Width="SizeToHeader"/>
+			</DataGrid.Columns>
+		</DataGrid>
+		<Label Content="{Binding Items.Count, ElementName=autorsDataGrid, Mode=OneWay}" Width="223" Height="26" Margin="0,293,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
 	</Grid>
 </Window>

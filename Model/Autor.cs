@@ -9,6 +9,11 @@ namespace MyHomeLib.Net
 {
 	public class Autor
 	{
+		public Autor()
+		{
+			Books = new List<Book>();
+		}
+
 		[Key]
 		public int IdAutor { get; set; }
 
@@ -24,12 +29,19 @@ namespace MyHomeLib.Net
 
 	public class Book
 	{
+		public Book()
+		{
+			Autors = new List<Autor>();
+			Genres = new List<Genre>();
+			Sequences = new List<Sequence>();
+		}
+
 		[Key]
 		public int IdBook { get; set; }
 
 		public string Title { get; set; }
 		public string Title1 { get; set; }
-		public int FileSize { get; set; }
+		public long FileSize { get; set; }
 		public int Year { get; set; }
 		public bool Deleted { get; set; }
 		public string Keywords { get; set; }
@@ -45,6 +57,10 @@ namespace MyHomeLib.Net
 
 	public class Sequence
 	{
+		public Sequence()
+		{
+			Books = new List<Book>();
+		}
 		[Key]
 		public int IdSequence { get; set; }
 
@@ -54,6 +70,11 @@ namespace MyHomeLib.Net
 
 	public class Genre
 	{
+		public Genre()
+		{
+			Books = new List<Book>();
+		}
+
 		[Key]
 		public int IdGenre { get; set; }
 
