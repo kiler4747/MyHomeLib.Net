@@ -41,18 +41,18 @@ namespace MyHomeLib.Net
 		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
 		{
 			System.Windows.Data.CollectionViewSource bdContextAutorsViewSource =
-				((System.Windows.Data.CollectionViewSource) (this.FindResource("bdContextAutorsViewSource")));
-			var words = SearchTextBox.Text.Split(new[] {' '});
+				((System.Windows.Data.CollectionViewSource)(this.FindResource("bdContextAutorsViewSource")));
+			var words = SearchTextBox.Text.Split(new[] { ' ' });
 			var query = Context.Autors.AsQueryable();
 			query = words.Aggregate(query,
-			                        (current, word) =>
-			                        current.Where(x => x.FirstName == word || x.MiddleName == word || x.LastName == word));
+									(current, word) =>
+									current.Where(x => x.FirstName == word || x.MiddleName == word || x.LastName == word));
 			//object result = default(object);
 			new Thread(() =>
 				{
-					var result = query.Select(x => new {x.IdAutor, x.FirstName, x.LastName, x.MiddleName})
-							                                        .AsParallel()
-							                                        .ToArray();
+					var result = query.Select(x => new { x.IdAutor, x.FirstName, x.LastName, x.MiddleName })
+																	.AsParallel()
+																	.ToArray();
 					if (!result.Any())
 						return;
 					bdContextAutorsViewSource.Dispatcher.Invoke(() =>
@@ -61,7 +61,7 @@ namespace MyHomeLib.Net
 						});
 				}
 
-	).Start();
+					).Start();
 			//if (!result.Any())
 			//	return;
 			//bdContextAutorsViewSource.Source = result;

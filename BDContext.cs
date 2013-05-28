@@ -11,6 +11,13 @@ namespace MyHomeLib.Net
 	public class BdContext:DbContext
 	{
 		public BdContext()
+			:base()
+		{
+			
+		}
+
+		public BdContext(string connectionStringName)
+			: base("name=ConnectionStringName")
 		{
 			
 		}

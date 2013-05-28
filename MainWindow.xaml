@@ -7,6 +7,8 @@
 		<CollectionViewSource x:Key="bdContextViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
 		<CollectionViewSource x:Key="bdContextAutorsViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
 		<CollectionViewSource x:Key="bdContextAutorsBooksViewSource" d:DesignSource="{d:DesignInstance {x:Type local:BdContext}, CreateList=True}"/>
+		<CollectionViewSource x:Key="bdContextAutorsViewSource1" Source="{Binding Autors, Source={StaticResource bdContextViewSource}}"/>
+		<CollectionViewSource x:Key="bdContextAutorsBooksViewSource1" Source="{Binding Books, Source={StaticResource bdContextAutorsViewSource1}}"/>
 	</Window.Resources>
 	<Grid DataContext="{StaticResource bdContextAutorsViewSource}">
 		<DataGrid x:Name="autorsDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,30,289,26" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="autorsDataGrid_SelectionChanged">
@@ -18,7 +20,7 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" TextChanged="TextBox_TextChanged"/>
-		<DataGrid x:Name="booksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bdContextAutorsBooksViewSource}}" Margin="228,0,0,0" RowDetailsVisibilityMode="VisibleWhenSelected">
+		<DataGrid x:Name="booksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bdContextAutorsBooksViewSource}}" Margin="228,0,0,120" RowDetailsVisibilityMode="VisibleWhenSelected">
 			<DataGrid.Columns>
 				<DataGridCheckBoxColumn x:Name="deletedColumn" Binding="{Binding Deleted}" Header="Deleted" Width="SizeToHeader"/>
 				<DataGridTextColumn x:Name="langColumn" Binding="{Binding Lang}" Header="Lang" Width="SizeToHeader"/>
@@ -42,5 +44,7 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<Label Content="{Binding Items.Count, ElementName=autorsDataGrid, Mode=OneWay}" Width="223" Height="26" Margin="0,293,0,0" VerticalAlignment="Bottom" HorizontalAlignment="Left"/>
+		<Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="100" Margin="228,219,0,0" Stroke="Black" VerticalAlignment="Top" Width="289"/>
+
 	</Grid>
 </Window>
