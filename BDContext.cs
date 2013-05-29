@@ -22,9 +22,9 @@ namespace MyHomeLib.Net
 			
 		}
 
-		public DbSet<Autor> Autors { get; set; }
-		public DbSet<Book> Books { get; set; }
-		public DbSet<Genre> Genres { get; set; }
-		public DbSet<Sequence> Sequences { get; set; }
+		public DbSet<Author> Autors { get; set; }
+		//public DbSet<Book> Books { get; set; }
+		//public DbSet<Genre> Genres { get; set; }
+		//public DbSet<Sequence> Sequences { get; set; }
 	}
 }

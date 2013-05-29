@@ -35,7 +35,8 @@ namespace MyHomeLib.Net
 			System.Windows.Data.CollectionViewSource bdContextAutorsViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("bdContextAutorsViewSource")));
 			// Load data by setting the CollectionViewSource.Source property:
 			//Context.Autors.Take(50000).Select(x => new { FirstName = x.FirstName, LastName = x.LastName, MiddleName = x.MiddleName }).ToArray().Load();
-			bdContextAutorsViewSource.Source = Context.Autors.Where(y => y.Books.Count > 0).Select(x => new { x.IdAutor, x.FirstName, x.LastName, x.MiddleName }).AsParallel().ToArray();
+
+			////bdContextAutorsViewSource.Source = Context.Autors.Where(y => y.Books.Count > 0).Select(x => new { x.AuthorID, x.FirstName, x.LastName, x.MiddleName }).AsParallel().ToArray();
 		}
 
 		private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -50,7 +51,7 @@ namespace MyHomeLib.Net
 			//object result = default(object);
 			new Thread(() =>
 				{
-					var result = query.Select(x => new { x.IdAutor, x.FirstName, x.LastName, x.MiddleName })
+					var result = query.Select(x => new { x.AuthorID, x.FirstName, x.LastName, x.MiddleName })
 																	.AsParallel()
 																	.ToArray();
 					if (!result.Any())
@@ -80,7 +81,7 @@ namespace MyHomeLib.Net
 				bdContextAutorsBooksViewSource.Source = null;
 				return;
 			}
-			bdContextAutorsBooksViewSource.Source = Context.Books.Where(x => x.Autors.Any(y => y.IdAutor == a.IdAutor)).ToArray();
+			//bdContextAutorsBooksViewSource.Source = Context.Books.Where(x => x.Autors.Any(y => y.AuthorID == a.IdAutor)).ToArray();
 		}
 	}
 }

@@ -86,7 +86,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Autor.cs" />
+    <Compile Include="Model\Author.cs" />
+    <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\Genre.cs" />
+    <Compile Include="Model\Sequence.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

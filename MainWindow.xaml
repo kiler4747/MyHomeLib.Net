@@ -20,7 +20,7 @@
 			</DataGrid.Columns>
 		</DataGrid>
 		<TextBox x:Name="SearchTextBox" HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="228" TextChanged="TextBox_TextChanged"/>
-		<DataGrid x:Name="booksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bdContextAutorsBooksViewSource}}" Margin="228,0,0,120" RowDetailsVisibilityMode="VisibleWhenSelected">
+		<DataGrid x:Name="booksDataGrid" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding Source={StaticResource bdContextAutorsBooksViewSource}}" Margin="228,0,0,100" RowDetailsVisibilityMode="VisibleWhenSelected">
 			<DataGrid.Columns>
 				<DataGridCheckBoxColumn x:Name="deletedColumn" Binding="{Binding Deleted}" Header="Deleted" Width="SizeToHeader"/>
 				<DataGridTextColumn x:Name="langColumn" Binding="{Binding Lang}" Header="Lang" Width="SizeToHeader"/>
